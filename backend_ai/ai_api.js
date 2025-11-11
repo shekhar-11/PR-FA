@@ -6,7 +6,7 @@ import {generatePrompt} from './prompt.js';
 
 async function main(jsonData) {
   console.log("Initiated")
-  const ai = new GoogleGenAI({apiKey:"AIzaSyC57tyrAwOpNWhUY65EeXFvxy8TLMK3w8M"});  
+  const ai = new GoogleGenAI({apiKey:""});  
   const resultsPrompt = await generatePrompt(jsonData);
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash',
