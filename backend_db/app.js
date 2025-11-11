@@ -11,7 +11,7 @@ app.use(cors());
 app.use("/api",userDataRoutes);
 const startServer = async () => {
   await connectDB();
-  app.listen(4000, () => {
+  app.listen(5200, () => {
     console.log('Server running on port 4000');
   });
 };

@@ -1,8 +1,6 @@
+import React, { useEffect, useState } from "react";
 
-
-import React, { useState } from "react";
-
-const Identification = () => {
+const Identification = ({ part1 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -30,29 +28,39 @@ const Identification = () => {
   };
 
   const questions = [
-      "Summary of the problem / what was wrong and not working based on code/HW analysis?",
-      "[Technical description of the fault] / Code deficiency, What was wrong in the source code?" ,
-      "[Dependency on the configuration] / Description if problem is based on certain configuration/features?",
-      "[Faulty component and version] / SW component and version where problem occurred first time. If problem occurred in different branches and all first broken versions for each branch shall be listed?",
-      "Was there anything confusing or difficult to understand during setup or use?",
-      "Did you notice any performance issues (like lag, crashes, or slow response)?",
-      "Did you face any problems or bugs while using the product? If yes, please describe them.",
+    "Summary of the problem / what was wrong and not working based on code/HW analysis?",
+    "[Technical description of the fault] / Code deficiency, What was wrong in the source code?",
+    "[Dependency on the configuration] / Description if problem is based on certain configuration/features?",
+    "[Faulty component and version] / SW component and version where problem occurred first time. If problem occurred in different branches and all first broken versions for each branch shall be listed?",
+    "Was there anything confusing or difficult to understand during setup or use?",
+    "Did you notice any performance issues (like lag, crashes, or slow response)?",
+    "Did you face any problems or bugs while using the product? If yes, please describe them.",
   ];
 
+  // 🔹 Auto-fill when part1 updates
+  useEffect(() => {
+    if (part1 && Object.keys(part1).length > 0) {
+      setData({
+        q1: part1["1"] || "",
+        q2: part1["2"] || "",
+        q3: part1["3"] || "",
+        q4: part1["4"] || "",
+        q5: part1["5"] || "",
+        q6: part1["6"] || "",
+        q7: part1["7"] || "",
+      });
+    }
+  }, [part1]);
+
   return (
-    <div className=" w-5/6   bg-gray-50  flex justify-center items-center p-8">
-    
+    <div className="w-5/6 bg-gray-50 flex justify-center items-center p-8">
       {isExpanded && (
         <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-10 transition-all"></div>
       )}
 
-      
       <div className="relative z-20 max-w-4xl w-full bg-white rounded-lg shadow-md p-6 transition-all duration-300">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Part A
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Part A</h1>
 
-       
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-3 mb-4">
             <h2 className="text-lg font-semibold text-gray-700">Information</h2>
@@ -69,19 +77,13 @@ const Identification = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </div>
         </div>
 
-       
-        <div className="flex justify-center mt-6">
+        {/* <div className="flex justify-center mt-6">
           <button
             onClick={saveData}
             className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -90,15 +92,13 @@ const Identification = () => {
           </button>
         </div>
 
-        
         {success && (
           <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md text-center">
             Feedback saved successfully!
           </div>
-        )}
+        )} */}
       </div>
 
-   
       {isExpanded && (
         <div className="fixed inset-0 flex justify-center items-center z-30 p-4">
           <div className="bg-white max-w-3xl w-full rounded-lg shadow-xl p-6 overflow-y-auto max-h-[85vh] animate-fadeIn">
@@ -116,12 +116,7 @@ const Identification = () => {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>

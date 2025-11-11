@@ -1,5 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
+import main from "../backend_ai/ai_api.js";
 dotenv.config();
 const uri = process.env.URL_TO_CONNECT;
 
@@ -28,8 +29,14 @@ export async function fetchAllDocs() {
 export async function fetchDocById(bug_idid) {
   const database = db || (await connectDB());
   const collection = database.collection("otmodels");
+  bug_idid = bug_idid.toString().trim();
   const rres = await collection.findOne({ bug_id:bug_idid});
-  console.log("Fetched document by ID:", rres);
+  // console.log("Fetched document by ID:", rres);
+  if(!rres){
+    console.log("No document found with the given ID");
+    return null;
+  }
+ 
   return rres;
 }
 

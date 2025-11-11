@@ -1,12 +1,13 @@
 import express from 'express';
 import { fetchAllDocs, fetchDocById } from '../fetchData.js';
+import main from '../../backend_ai/ai_api.js';
 
 
 const router = express.Router();
 
 
 router.get("/getUserData",async (req,res)=>{
-
+    console.log("Inside getUserData route");
     try{
         const { id } = req.query;
         console.log("Received id:", id);
@@ -15,7 +16,12 @@ router.get("/getUserData",async (req,res)=>{
     //    console.log("Received OT data:", otData);
        const doc  = await fetchDocById(id); 
        if(!doc){
-        console.log("No document found with the given ID");
+        res.status(404).json({message:"No document found with the given id"});
+       }
+       else{
+            const result = await main(doc);
+            console.log("Result from fetchDocById:", result);
+            res.status(200).json({message:"Data fetched successfully", data:result})
        }
     }
     catch(err){

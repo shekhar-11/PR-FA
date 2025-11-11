@@ -1,6 +1,6 @@
 
-function generatePrompt(jsonData) {
-  const questionsList = predefinedQuestions.map((q, index) => `${index + 1}. ${q}`).join('\n');
+function generatePrompt(data) {
+  const questionsList = predefined.map((q, index) => `${index + 1}. ${q}`).join('\n');
 
   return `You are an expert technical analyst. Your task is to extract information from the provided JSON data and answer a series of questions.
 Analyze the JSON content carefully and provide concise, human-readable answers for each question.
@@ -11,7 +11,7 @@ Each answer should be brief, to the point, and avoid jargon where possible, aimi
 
 Here is the JSON data to analyze:
 \`\`\`json
-${JSON.stringify(jsonData, null, 2)}
+${JSON.stringify(data, null, 2)}
 \`\`\`
 
 Here are the questions you need to answer. Please output your answers in a JSON object where keys are the question numbers (e.g., "1", "2") and values are the corresponding answers or an empty string if not found.
@@ -28,7 +28,7 @@ Output JSON format:
 }
 
 
-const questionsList = [
+const predefined = [
   "Summary of the problem / what was wrong and not working based on code/HW analysis?",
   "[Technical description of the fault] / Code deficiency, What was wrong in the source code?",
   "[Dependency on the configuration] / Description if problem is based on certain configuration/features?",
@@ -38,7 +38,9 @@ const questionsList = [
   "Did you face any problems or bugs while using the product? If yes, please describe them.",
   "[Workaround] / how problem can be avoided or effects mitigated without code/HW changes before correction ready?",
   "[Description of the correction] / What changes were done in code/HW architecture to fix the issue and how the problem will be solved?",
-  "[Test requirements] / how to test the correction in real environment available for the customer? How to test the correction and catch the problem in future in SC/MT/UT level??"
+  "[Test requirements] / how to test the correction in real environment available for the customer? How to test the correction and catch the problem in future in SC/MT/UT level??",
+  "What is the id of the issue",
+  
 ];
 
 export { generatePrompt };
